@@ -1,12 +1,11 @@
 import React from 'react';
-
-import './App.css';
+import Piano from './piano'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-
+    <div>
+      <header className="content">
+        <Piano />
       </header>
     </div>
   );

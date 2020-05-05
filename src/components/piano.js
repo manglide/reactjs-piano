@@ -30,7 +30,7 @@ export default function Piano() {
   * @param {object} - javascript synthetic event
   * @kind constant
   */
-  function handleClick (event) {
+  const handleClick = (event) => {
     setLogValue(event.target.innerHTML)
   }
 
@@ -39,14 +39,14 @@ export default function Piano() {
   * @param {object} - javascript synthetic event
   * @kind constant
   */
-  function userInputAction (event) {
+  const userInputAction = (event) => {
     setUserInputs(event.target.value)
   }
 
   /**
   * Main Key Highlighter function
   */
-  function highlightKeys() {
+  const highlightKeys = () => {
     // Check if the string matches expected behavior
     if (userinputs.indexOf(',') > -1) {
       // Split the user supplied input only in the presence of a comma
@@ -76,6 +76,8 @@ export default function Piano() {
   * @kind constant
   */
   const highlighterTimeout = (char) => {
+    // left intentionally to test frame transition
+    // alert('left intentionally to test frame transition')
     setTimeoutID(setTimeout(() => { clearTimeout(timeoutID); setSelected('') }, 1000))
   }
 

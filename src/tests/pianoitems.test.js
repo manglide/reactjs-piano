@@ -32,8 +32,6 @@ it('Piano list items respond to clicks', () => {
   });
   // Query for piano Ordered first list item
   const ol = container.querySelector("ol");
-  expect(ol.innerHTML).toBe('<li class="charland">C</li><li class="darkeys"></li><li class="charland fill">D</li><li class="darkeys"></li><li class="charland fill">E</li><li class="darkeys"></li><li class="charland fill">F</li><li class="charland">G</li><li class="darkeys"></li><li class="charland fill">A</li><li class="darkeys"></li><li class="charland fill">B</li>');
-
   act(() => {
     ol.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });

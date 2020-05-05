@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import '../assets/css/piano.css';
 import PianoItems from './PianoItems'
 import Player from './Player'
+import ErrorBoundary from '../errors'
 
 /** @function
  * @name Piano */
 export default function Piano() {
   // default value for our logger. Input read-only element
-  const [logvalue, setLogValue] = useState('')
+  const [logvalue, setLogValue] = React.useState('')
   // user supplied comma delimited Input Element
-  const [userinputs, setUserInputs] = useState('')
+  const [userinputs, setUserInputs] = React.useState('')
   // set the selectd character variable so we can access it in component
-  const [selected, setSelected] = useState('')
+  const [selected, setSelected] = React.useState('')
   // Reference to each SetTimeout ID
-  const [timeoutID, setTimeoutID] = useState(null)
+  const [timeoutID, setTimeoutID] = React.useState(null)
 
   /**
   * Array for which we want to handle selected operations upon and also
@@ -45,12 +46,12 @@ export default function Piano() {
   /**
   * Main Key Highlighter function
   */
-  async function highlightKeys() {
+  function highlightKeys() {
     // Check if the string matches expected behavior
     if (userinputs.indexOf(',') > -1) {
       // Split the user supplied input only in the presence of a comma
       // and loop through the returned array elements
-       userinputs.split(',').forEach(async (element) => {
+       userinputs.split(',').forEach((element) => {
          // trim character by removing white space from both ends of literal
          element = element.trim().toLowerCase();
          // search through the piano chars array variable if element matches any element within array
@@ -61,7 +62,7 @@ export default function Piano() {
            setSelected(element);
            // call 'highlighterTimeout' to remove the selected class on the current item
            // setSelected is called with an empty string
-           await highlighterTimeout(element)
+           highlighterTimeout(element)
          }
        });
     }
@@ -80,10 +81,12 @@ export default function Piano() {
 
   return (
     <div className="wrapper">
-      <div>
-        <PianoItems onClick={handleClick} selected={selected} />
-        <Player loggerValue={logvalue} userInputAction={userInputAction} generateTransition={highlightKeys} />
-      </div>
+      <ErrorBoundary>
+        <div>
+          <PianoItems onClick={handleClick} selected={selected} />
+          <Player loggerValue={logvalue} userInputAction={userInputAction} userInputsValue={userinputs} generateTransition={highlightKeys} />
+        </div>
+      </ErrorBoundary>
     </div>
   )
 }

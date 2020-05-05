@@ -34,4 +34,4 @@ it('test the generate button', () => {
 
   // Simulate the Click on the Generate Element
   expect(onClick).toHaveBeenCalledTimes(1);
-})
+});

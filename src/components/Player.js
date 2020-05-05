@@ -5,7 +5,7 @@ import React from 'react'
 export default function Player(props) {
   return (
     <div className="player">
-        <input type="text" readOnly value={props.loggerValue} />
+        <div data-testid="logger">{props.loggerValue}</div>
         <input name="player" onChange={props.userInputAction} type="text" />
         <button className="btn btn-player" onClick={props.generateTransition}>Animate</button>
     </div>

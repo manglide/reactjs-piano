@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 
 import '../assets/css/piano.css';
+import PianoItems from './PianoItems'
+import Player from './Player'
 
 /** @function
  * @name Piano */
@@ -27,7 +29,7 @@ export default function Piano() {
   * @param {object} - javascript synthetic event
   * @kind constant
   */
-  const handleClick = (event) => {
+  function handleClick (event) {
     setLogValue(event.target.innerHTML)
   }
 
@@ -36,7 +38,7 @@ export default function Piano() {
   * @param {object} - javascript synthetic event
   * @kind constant
   */
-  const userInputAction = (event) => {
+  function userInputAction (event) {
     setUserInputs(event.target.value)
   }
 
@@ -79,25 +81,8 @@ export default function Piano() {
   return (
     <div className="wrapper">
       <div>
-        <ol onClick={handleClick}>
-          <li className={`${selected === 'c' ? 'selected charland' : 'charland'}`}>C</li>
-          <li className="darkeys"></li>
-          <li className={`${selected === 'd' ? 'selected charland fill' : 'charland fill'}`}>D</li>
-          <li className="darkeys"></li>
-          <li className={`${selected === 'e' ? 'selected charland fill' : 'charland fill'}`}>E</li>
-          <li className="darkeys"></li>
-          <li className={`${selected === 'f' ? 'selected charland fill' : 'charland fill'}`}>F</li>
-          <li className={`${selected === 'g' ? 'selected charland' : 'charland'}`}>G</li>
-          <li className="darkeys"></li>
-          <li className={`${selected === 'a' ? 'selected charland fill' : 'charland fill'}`}>A</li>
-          <li className="darkeys"></li>
-          <li className={`${selected === 'b' ? 'selected charland fill' : 'charland fill'}`}>B</li>
-        </ol>
-        <div className="player">
-            <input placeholder="" id="logger" type="text" readOnly value={logvalue} className="logger" />
-            <input name="player" onChange={userInputAction} type="text" />
-            <button className="btn btn-player" onClick={highlightKeys}>Animate</button>
-        </div>
+        <PianoItems onClick={handleClick} selected={selected} />
+        <Player loggerValue={logvalue} userInputAction={userInputAction} generateTransition={highlightKeys} />
       </div>
     </div>
   )

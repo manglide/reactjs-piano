@@ -29,30 +29,43 @@ it('Piano component renders well', () => {
 it('Piano list items when clicked changes the logger element innerHTML', () => {
   const onClick = jest.fn();
   act(() => {
-    render(
-        <div>
-          <PianoItems onClick={onClick} />
-          <Player />
-        </div>,
-        container
-      );
+    render(<PianoItems onClick={onClick} />,container);
   });
 
   // Query for piano Ordered first list item
   const li = container.querySelectorAll("li")[0];
+
   // The expected log value for the item clicked
   const expectedLoggerValue = li.textContent;
+
+  // We are simulating clicking the first list item in PianoItems
+  // We know the first list Item value should be the textContent of the clicked item
+  // So we set the logvalue to expectedLoggerValue and pass that as a prop to the
+  // player component
+  const logvalue = expectedLoggerValue;
+
   // Ensure were picking the first Item
   expect(li.textContent).toBe(expectedLoggerValue);
 
   act(() => {
     li.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
-  // Simulate Click
+
+  // Simulate the Click on an ol li item
   expect(onClick).toHaveBeenCalledTimes(1);
 
-  // Query for Logger Input Element
+  // Render the player item to test the value of logvalue after ol li item click
+  act(() => {
+    render(
+        <div>
+          <Player loggerValue={logvalue} />
+        </div>,
+        container
+      );
+  });
+
+  // Query for Logger DIV Element
   const logger = container.querySelector("[data-testid=logger]");
-  // Inspect
+  // Inspect the return value
   expect(logger.textContent).toBe(expectedLoggerValue)
 });

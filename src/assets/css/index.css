@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing:border-box
+}
+
 .content {
   min-height: 100vh;
   display: flex;

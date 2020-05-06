@@ -31,7 +31,13 @@ export default function Piano() {
   * @kind constant
   */
   const handleClick = (event) => {
-    setLogValue(event.target.innerHTML)
+    // We attached our onClick Listener to the parent OL element.
+    // The parent OL element is ClassLess, we need to Check if the
+    // OnClik Event is from a ClassLess element and Ignore
+    // Else the Logger will be populated with the innerHTML of the OL
+    // Element. This will help us handle click events of only the list Items
+    // Fixed 6th May, 2020
+    if(event.target.className) setLogValue(event.target.innerHTML)
   }
 
   /**
@@ -78,7 +84,7 @@ export default function Piano() {
   const highlighterTimeout = (char) => {
     // left intentionally to test frame transition
     // You can uncomment the below to see the keys highlighting
-    // alert('left intentionally to test frame transition')
+    alert('left intentionally to test frame transition')
     setTimeoutID(setTimeout(() => { clearTimeout(timeoutID); setSelected('') }, 1000))
   }
 

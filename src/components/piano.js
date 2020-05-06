@@ -84,7 +84,7 @@ export default function Piano() {
   const highlighterTimeout = (char) => {
     // left intentionally to test frame transition
     // You can uncomment the below to see the keys highlighting
-    alert('left intentionally to test frame transition')
+    // alert('left intentionally to test frame transition')
     setTimeoutID(setTimeout(() => { clearTimeout(timeoutID); setSelected('') }, 1000))
   }
 
